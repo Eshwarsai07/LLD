@@ -36,7 +36,7 @@ public class BlockingQueue2 {
 				System.out.println("Queue size after put call " + q.size() + " " + Thread.currentThread().getName());
 				notEmpty.signalAll();
 			} catch (Exception e) {
-				System.out.println("Exception occured" + e);
+				System.out.println("Exception occured during put call" + e);
 			} finally {
 				lock.unlock();
 			}
@@ -51,7 +51,7 @@ public class BlockingQueue2 {
 		}
 
 		public BlockingQImpl() {
-			this(2);
+			this(5);
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class BlockingQueue2 {
 			try {
 				lock.lock();
 				System.out.println("Lock acquired by -->" + Thread.currentThread().getName());
-				while (q.size() == 0) {
+				while (q.isEmpty()) {
 					System.out.println("queue is empty waiting for producers to produce");
 					notEmpty.await();
 				}
