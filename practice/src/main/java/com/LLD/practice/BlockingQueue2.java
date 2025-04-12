@@ -84,6 +84,7 @@ public class BlockingQueue2 {
 				queue.put(1);
 			});
 		}
+
 		for (int i = 0; i < 5; i++) {
 			ex.submit(() -> {
 				queue.remove();
